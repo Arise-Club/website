@@ -1,1 +1,1 @@
-# Arise Website
+# Arise Website.
