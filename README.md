@@ -1,7 +1,7 @@
 # Arise Website 🚀✨
 
 <br > **Contributors** 💻 <br />
-<br > - Halit Dincer<br />
+<br > -Halit Dincer<br />
 <br > - Hulya Yasar<br />
 <br > - Enes Yesil<br />
 <br > - Cevat Tellioglu<br />
