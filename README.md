@@ -5,6 +5,8 @@
 
 Welcome to Arise, a voluntary group established for students in Canada. Whether they are currently enrolled in a university or prospective students, they are welcome to get in touch and expand their horizons by exchanging information and helping each other. This website is designed to reflect the idea of the Arise group to the world over the Internet. All news, updates, and upcoming events are posted on the relevant web pages. Go ahead and check it out!
 
+## Technologies/Frameworks
+
 <br > **Contributors** 💻 <br />
 <br > -Halit Dincer<br />
 <br > - Hulya Yasar<br />
