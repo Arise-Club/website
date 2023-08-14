@@ -1,0 +1,29 @@
+{
+  "title": "Kids & Youth Festival!",
+  "date": "Aug 20, 2024 @ 10:00 am - Sep 9, 2024 @ 3:30pm",
+  "image": {
+    "url": "https://source.unsplash.com/random/1200x400",
+    "alt": "Random image from Unsplash"
+  },
+  "content": "# Markdown content goes here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla odio sed eros tempus mollis eu a justo. Sed est nulla, placerat a feugiat et, blandit non urna. Nunc quis vehicula libero. Proin varius tempor lectus non gravida. Quisque et facilisis mi. Nullam sodales facilisis mi nec iaculis. Quisque a arcu euismod sem iaculis laoreet.\n- Hello\n- World\n> Bruh",
+  "details": {
+    "start": "Aug 20, 2024 @ 10:00 am",
+    "end": "Sep 9, 2024 @ 3:30pm",
+    "cost": "$270",
+    "category": "Festival"
+  },
+  "organizer": {
+    "name": "Ashton Porter",
+    "phone": "88001234567",
+    "email": "info@example.com",
+    "website": "https://example.com"
+  },
+  "venue": {
+    "name": "Manhattan Club",
+    "address": "350 5th Ave, New York, NY 10118 United States",
+    "addressURL": "https://goo.gl/maps/snNWPNNH6ea8XoZq8",
+    "addressEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.6055184203096!2d-73.98503393914793!3d40.748704975273405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b30eac9f%3A0xaca05ca48ab5ac2c!2s350%205th%20Ave%2C%20New%20York%2C%20NY%2010118%2C%20USA!5e0!3m2!1sen!2sca!4v1691963639707!5m2!1sen!2sca",
+    "phone": "88001234567",
+    "website": "https://example.com"
+  }
+}
