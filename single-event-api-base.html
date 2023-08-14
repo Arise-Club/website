@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Arise Website</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <!-- HEADER/NAVBAR -->
+
+  <main>
+    <div class="container mx-auto my-10 px-5 flex flex-col gap-4">
+      <h1 class="text-5xl font-bold text-center" id="title"></h1>
+      <div class="flex items-center gap-x-4 text-xs place-content-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+        </svg>
+        <p class="text-gray-500" id="date"></p>
+      </div>
+      <img class="rounded" id="image">
+      <article class="prose text-gray-600 w-full" id="content"></article>
+      <div class="flex flex-wrap gap-y-4 gap-x-10 mt-10">
+        <div class="flex-1 space-y-4 w-64">
+          <h2 class="text-3xl font-bold">Details</h2>
+          <div>
+            <p class="font-bold">Start:</p>
+            <p class="text-gray-600" id="start"></p>
+          </div>
+          <div>
+            <p class="font-bold">End:</p>
+            <p class="text-gray-600" id="end"></p>
+          </div>
+          <div>
+            <p class="font-bold">Cost:</p>
+            <p class="text-gray-600" id="cost"></p>
+          </div>
+          <div>
+            <p class="font-bold">Event Category:</p>
+            <p class="text-gray-600" id="category"></p>
+          </div>
+        </div>
+        <div class="flex-1 space-y-4 w-64">
+          <h2 class="text-3xl font-bold">Organizer</h2>
+          <div>
+            <p class="text-gray-600" id="organizerName"></p>
+          </div>
+          <div>
+            <p class="font-bold">Phone:</p>
+            <a class="text-gray-600" id="organizerPhone"></a>
+          </div>
+          <div>
+            <p class="font-bold">Email:</p>
+            <p class="text-gray-600" id="organizerEmail"></p>
+          </div>
+          <div>
+            <a class="text-gray-600" id="organizerWebsite">View Organizer website</a>
+          </div>
+        </div>
+        <div class="flex-1 space-y-4 w-64">
+          <h2 class="text-3xl font-bold">Venue</h2>
+          <div>
+            <p class="text-gray-600" id="venueName"></p>
+          </div>
+          <div>
+            <a id="venueAddress"></a>
+          </div>
+          <div>
+            <p class="font-bold">Phone:</p>
+            <a class="text-gray-600" id="venuePhone"></a>
+          </div>
+          <div>
+            <a class="text-gray-600" id="venueWebsite">View Venue website</a>
+          </div>
+        </div>
+        <div class="flex-1 space-y-4 w-96">
+          <iframe class="w-full" id="mapIframe" width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+
+  <script src="./scripts/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    async function renderPage() {
+      const response = await fetch(buildEventDetailsURL()).catch(() => {
+        return {
+          ok: false
+        }
+      });
+      if (!response.ok) {
+        location.href = './404.html';
+        return;
+      }
+
+      const event = await response.json();
+      updateComponents(event);
+    }
+
+    // Builds the URL for the event details JSON file.
+    function buildEventDetailsURL() {
+      const slug = location.hash.slice(1);
+
+      // TODO: Remove before production. Only for development purposes.
+      if (slug === '') {
+        return `./events/kids-youth-festival.json`;
+      }
+
+      // For now, we'll just GitHub as our API.
+      return `./events/${slug}.json`;
+    }
+
+    function updateComponents(event) {
+      document.title = event.title;
+      document.getElementById('title').textContent = event.title;
+      document.getElementById('date').textContent = event.date;
+      document.getElementById('image').src = event.image.url;
+      document.getElementById('image').alt = event.image.alt;
+      // Markdown is not rendered correctly at the moment due to using the CDN version of Tailwind, but once we build the final CSS file, it should work with the @tailwindcss/typography plugin.
+      document.getElementById('content').innerHTML = marked.parse(event.content);
+
+      document.getElementById('start').textContent = event.details.start;
+      document.getElementById('end').textContent = event.details.end;
+      document.getElementById('cost').textContent = event.details.cost;
+      document.getElementById('category').textContent = event.details.category;
+
+      document.getElementById('organizerName').textContent = event.organizer.name;
+      document.getElementById('organizerPhone').textContent = event.organizer.phone;
+      document.getElementById('organizerPhone').href = `tel:${event.organizer.phone}`;
+      document.getElementById('organizerEmail').textContent = event.organizer.email;
+      document.getElementById('organizerEmail').href = `mailto:${event.organizer.email}`;
+      document.getElementById('organizerWebsite').href = event.organizer.website;
+
+      document.getElementById('venueName').textContent = event.venue.name;
+      document.getElementById('venueAddress').textContent = event.venue.address;
+      document.getElementById('venueAddress').href = event.venue.addressURL;
+      document.getElementById('venuePhone').textContent = event.venue.phone;
+      document.getElementById('venuePhone').href = `tel:${event.venue.phone}`;
+      document.getElementById('venueWebsite').href = event.organizer.website;
+      document.getElementById('mapIframe').src = event.venue.addressEmbed;
+    }
+
+    renderPage();
+  </script>
+</body>
+
+</html>
